@@ -1,0 +1,15 @@
+{
+	"name": "pmcdf",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "181214c7-a116-4811-9f3b-11750efbad8d",
+		"tenantId": "206711fa-381e-4833-9a88-462011c87366"
+	}
+}
