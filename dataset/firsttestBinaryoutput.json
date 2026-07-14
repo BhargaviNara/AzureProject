@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "output.txt",
+				"fileName": "artistoutput.txt",
 				"folderPath": "output",
 				"container": "sink"
 			}
