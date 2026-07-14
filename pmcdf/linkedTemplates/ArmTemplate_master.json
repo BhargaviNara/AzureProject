@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Azure_Sql'"
 		},
+		"AzureBlobStoragecsv_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoragecsv'"
+		},
 		"AzureDataLake_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storagazureproject.dfs.core.windows.net/"
@@ -70,6 +74,9 @@
 					},
 					"Azure_Sql_password": {
 						"value": "[parameters('Azure_Sql_password')]"
+					},
+					"AzureBlobStoragecsv_connectionString": {
+						"value": "[parameters('AzureBlobStoragecsv_connectionString')]"
 					},
 					"AzureDataLake_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLake_properties_typeProperties_url')]"
