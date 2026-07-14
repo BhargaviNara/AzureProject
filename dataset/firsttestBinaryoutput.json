@@ -1,5 +1,5 @@
 {
-	"name": "firstBinarytestinput",
+	"name": "firsttestBinaryoutput",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -10,7 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "source"
+				"fileName": "outout.txt",
+				"folderPath": "output",
+				"container": "sink"
 			}
 		}
 	}
