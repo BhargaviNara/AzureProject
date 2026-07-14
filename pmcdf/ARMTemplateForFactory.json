@@ -141,7 +141,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "outout.txt",
+						"fileName": "output.txt",
 						"folderPath": "output",
 						"container": "sink"
 					}
