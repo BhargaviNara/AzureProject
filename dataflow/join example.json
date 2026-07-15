@@ -49,7 +49,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> address",
-				"emp, address join(ERROR_FUNCTION('') == address@id,",
+				"emp, address join(emp@id == address@id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
