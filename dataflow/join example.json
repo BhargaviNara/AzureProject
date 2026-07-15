@@ -32,7 +32,7 @@
 				"     ignoreNoFilesFound: false) ~> emp",
 				"source(output(",
 				"          id as string,",
-				"          fav_food as string",
+				"          address as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",

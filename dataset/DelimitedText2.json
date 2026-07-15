@@ -24,7 +24,7 @@
 				"type": "String"
 			},
 			{
-				"name": "fav_food",
+				"name": "address",
 				"type": "String"
 			}
 		]
