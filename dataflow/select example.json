@@ -23,7 +23,7 @@
 			],
 			"transformations": [
 				{
-					"name": "filter"
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -35,8 +35,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> empfilter",
-				"empfilter filter(id==\"1\") ~> filter",
-				"filter sink(allowSchemaDrift: true,",
+				"empfilter select(mapColumn(",
+				"          num = id,",
+				"          first_name = name,",
+				"          designation = job",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id as string,",
