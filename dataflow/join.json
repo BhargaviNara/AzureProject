@@ -36,7 +36,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> foodsource2",
-				"famsource1, foodsource2 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"famsource1, foodsource2 join(ERROR_FUNCTION('') == id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
