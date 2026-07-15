@@ -35,7 +35,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          id as short,",
+				"          id as string,",
 				"          name as string,",
 				"          job as string",
 				"     ),",
@@ -49,7 +49,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> address",
-				"emp, address join(emp@id == address@id,",
+				"emp, address join(ERROR_FUNCTION('') == address@id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
