@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureBlobStoragecsv_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoragecsv'"
+		},
 		"AzureDataLake_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLake'"
@@ -18,10 +22,6 @@
 		"Azure_Sql_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Azure_Sql'"
-		},
-		"AzureBlobStoragecsv_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoragecsv'"
 		},
 		"AzureDataLake_properties_typeProperties_url": {
 			"type": "string",
@@ -69,14 +69,14 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureBlobStoragecsv_connectionString": {
+						"value": "[parameters('AzureBlobStoragecsv_connectionString')]"
+					},
 					"AzureDataLake_accountKey": {
 						"value": "[parameters('AzureDataLake_accountKey')]"
 					},
 					"Azure_Sql_password": {
 						"value": "[parameters('Azure_Sql_password')]"
-					},
-					"AzureBlobStoragecsv_connectionString": {
-						"value": "[parameters('AzureBlobStoragecsv_connectionString')]"
 					},
 					"AzureDataLake_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLake_properties_typeProperties_url')]"
