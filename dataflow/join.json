@@ -16,7 +16,7 @@
 						"referenceName": "DelimitedText2",
 						"type": "DatasetReference"
 					},
-					"name": "foodsource2"
+					"name": "address"
 				}
 			],
 			"sinks": [],
@@ -35,8 +35,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> foodsource2",
-				"emp, foodsource2 join(ERROR_FUNCTION('') == id,",
+				"     ignoreNoFilesFound: false) ~> address",
+				"emp, address join(ERROR_FUNCTION('') == id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
