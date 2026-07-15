@@ -18,7 +18,7 @@
 						"referenceName": "filteroutputsink",
 						"type": "DatasetReference"
 					},
-					"name": "filterop"
+					"name": "selectop"
 				}
 			],
 			"transformations": [
@@ -51,7 +51,7 @@
 				"          address as string",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> filterop"
+				"     skipDuplicateMapOutputs: true) ~> selectop"
 			]
 		}
 	}
