@@ -1,0 +1,52 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "emp",
+						"type": "DatasetReference"
+					},
+					"name": "empfilter"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "filteroutputsink",
+						"type": "DatasetReference"
+					},
+					"name": "filterop"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as string,",
+				"          name as string,",
+				"          job as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> empfilter",
+				"empfilter filter(id==\"1\") ~> filter",
+				"filter sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as string,",
+				"          name as string,",
+				"          job as string,",
+				"          address as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> filterop"
+			]
+		}
+	}
+}
