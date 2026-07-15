@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText3",
+						"referenceName": "joinoutput",
 						"type": "DatasetReference"
 					},
 					"name": "joinoutput"
