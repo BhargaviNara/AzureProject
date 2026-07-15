@@ -9,7 +9,7 @@
 						"referenceName": "DelimitedText1",
 						"type": "DatasetReference"
 					},
-					"name": "famsource1"
+					"name": "emp"
 				},
 				{
 					"dataset": {
@@ -20,18 +20,27 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> famsource1",
+				"     ignoreNoFilesFound: false) ~> emp",
 				"source(output(",
 				"          id as string,",
 				"          fav_food as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> foodsource2"
+				"     ignoreNoFilesFound: false) ~> foodsource2",
+				"emp, foodsource2 join(ERROR_FUNCTION('') == id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
