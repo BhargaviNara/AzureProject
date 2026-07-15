@@ -20,11 +20,7 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "join"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -35,12 +31,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> foodsource2",
-				"famsource1, foodsource2 join(ERROR_FUNCTION('') == id,",
-				"     joinType:'inner',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join"
+				"     ignoreNoFilesFound: false) ~> foodsource2"
 			]
 		}
 	}
