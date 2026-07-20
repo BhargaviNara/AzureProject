@@ -1,0 +1,12 @@
+{
+	"name": "ForEachDemo",
+	"properties": {
+		"parameters": {
+			"outputFolders": {
+				"type": "array",
+				"defaultValue": "[output1,outout2,output3]"
+			}
+		},
+		"annotations": []
+	}
+}
