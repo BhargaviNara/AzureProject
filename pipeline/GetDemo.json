@@ -48,6 +48,25 @@
 						"value": "@activity('Get Metadata1').output.exists",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "status1",
+								"value": {
+									"value": "@variables('status')",
+									"type": "Expression"
+								}
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Copy data1",
@@ -101,6 +120,9 @@
 			"status": {
 				"type": "String",
 				"defaultValue": "File does not exist."
+			},
+			"status1": {
+				"type": "String"
 			}
 		},
 		"annotations": []
