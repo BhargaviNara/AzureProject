@@ -54,7 +54,13 @@
 							"outputs": [
 								{
 									"referenceName": "foreachdemodatasetsink",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"folderName": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
