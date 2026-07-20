@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -122,7 +123,8 @@
 				"defaultValue": "File does not exist."
 			},
 			"status1": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "File does not exist."
 			}
 		},
 		"annotations": []
