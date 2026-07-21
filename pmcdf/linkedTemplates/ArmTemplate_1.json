@@ -13,25 +13,212 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/ForEachDemo')]",
+			"name": "[concat(parameters('factoryName'), '/filter example')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "emp",
+								"type": "DatasetReference"
+							},
+							"name": "empfilter"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "filteroutputsink",
+								"type": "DatasetReference"
+							},
+							"name": "filterop"
+						}
+					],
+					"transformations": [
+						{
+							"name": "filter"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          id as string,",
+						"          name as string,",
+						"          job as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> empfilter",
+						"empfilter filter(id==\"1\") ~> filter",
+						"filter sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          id as string,",
+						"          name as string,",
+						"          job as string,",
+						"          address as string",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> filterop"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/join example')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "emp",
+								"type": "DatasetReference"
+							},
+							"name": "emp"
+						},
+						{
+							"dataset": {
+								"referenceName": "address",
+								"type": "DatasetReference"
+							},
+							"name": "address"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "joinoutput",
+								"type": "DatasetReference"
+							},
+							"name": "joinoutput"
+						}
+					],
+					"transformations": [
+						{
+							"name": "join1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          id as string,",
+						"          name as string,",
+						"          job as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> emp",
+						"source(output(",
+						"          id as string,",
+						"          address as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> address",
+						"emp, address join(emp@id == address@id,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> join1",
+						"join1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          id as string,",
+						"          name as string,",
+						"          address as string",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> joinoutput"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/select example')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "emp",
+								"type": "DatasetReference"
+							},
+							"name": "empfilter"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "filteroutputsink",
+								"type": "DatasetReference"
+							},
+							"name": "selectop"
+						}
+					],
+					"transformations": [
+						{
+							"name": "select1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          id as string,",
+						"          name as string,",
+						"          job as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> empfilter",
+						"empfilter select(mapColumn(",
+						"          num = id,",
+						"          first_name = name,",
+						"          designation = job",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"select1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          id as string,",
+						"          name as string,",
+						"          job as string,",
+						"          address as string",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> selectop"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IfDemo')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ForEach1",
-						"type": "ForEach",
+						"name": "If Condition1",
+						"type": "IfCondition",
 						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
-							"items": {
-								"value": "@pipeline().parameters.outputFolders",
+							"expression": {
+								"value": "@bool(pipeline().parameters.copyOutput)",
 								"type": "Expression"
 							},
-							"isSequential": true,
-							"activities": [
+							"ifFalseActivities": [
 								{
-									"name": "Copy data1",
+									"name": "Copy data2",
 									"type": "Copy",
 									"dependsOn": [],
 									"policy": {
@@ -70,108 +257,16 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "foreachdemodatasetsink",
+											"referenceName": "ifoutputBinary",
 											"type": "DatasetReference",
 											"parameters": {
-												"folderName": {
-													"value": "@item()",
+												"outputFolder": {
+													"value": "@pipeline().parameters.outputFolder2",
 													"type": "Expression"
 												}
 											}
 										}
 									]
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"outputFolders": {
-						"type": "array",
-						"defaultValue": [
-							"output1",
-							"outout2",
-							"output3"
-						]
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GetDemo')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "Binaryempsource",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"exists"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					},
-					{
-						"name": "If Condition1",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@activity('Get Metadata1').output.exists",
-								"type": "Expression"
-							},
-							"ifFalseActivities": [
-								{
-									"name": "Set variable1",
-									"type": "SetVariable",
-									"dependsOn": [],
-									"policy": {
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "status1",
-										"value": {
-											"value": "@variables('status')",
-											"type": "Expression"
-										}
-									}
 								}
 							],
 							"ifTrueActivities": [
@@ -215,9 +310,14 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "Binaryempsource",
+											"referenceName": "ifoutputBinary",
 											"type": "DatasetReference",
-											"parameters": {}
+											"parameters": {
+												"outputFolder": {
+													"value": "@pipeline().parameters.outputFolder1",
+													"type": "Expression"
+												}
+											}
 										}
 									]
 								}
@@ -228,13 +328,15 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"variables": {
-					"status": {
-						"type": "String",
-						"defaultValue": "File does not exist."
+				"parameters": {
+					"copyOutput": {
+						"type": "string"
 					},
-					"status1": {
-						"type": "String"
+					"outputFolder1": {
+						"type": "string"
+					},
+					"outputFolder2": {
+						"type": "string"
 					}
 				},
 				"annotations": []
@@ -284,7 +386,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/join example')]"
+			]
 		}
 	]
 }
