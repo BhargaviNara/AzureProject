@@ -15,9 +15,9 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"method": "GET",
+					"method": "POST",
 					"url": {
-						"value": "https://dummy.restapiexample.com/api/v1/employees",
+						"value": "https://dummy.restapiexample.com/api/v1/create",
 						"type": "Expression"
 					}
 				}
