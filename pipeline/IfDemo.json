@@ -1,6 +1,25 @@
 {
 	"name": "IfDemo",
 	"properties": {
+		"activities": [
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
+		"parameters": {
+			"copyOutput": {
+				"type": "string"
+			},
+			"outputFolder1": {
+				"type": "string"
+			},
+			"outputFolder2": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
