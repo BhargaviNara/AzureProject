@@ -67,7 +67,11 @@
 				"          address as string",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> joinoutput"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          name,",
+				"          address",
+				"     )) ~> joinoutput"
 			]
 		}
 	}
