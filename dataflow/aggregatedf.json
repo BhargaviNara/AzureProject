@@ -1,0 +1,19 @@
+{
+	"name": "aggregatedf",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "aggsource1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> aggsource1"
+			]
+		}
+	}
+}
