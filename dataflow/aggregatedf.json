@@ -47,6 +47,7 @@
 				"          job as string,",
 				"          address as string",
 				"     ),",
+				"     partitionFileNames:['aggreopsink.txt'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
